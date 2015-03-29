@@ -12,37 +12,52 @@ public class Main implements Runnable{
 	public void run() {
 		PrintWriter out = null;
 		try {
+			System.out.println("!");
 			out = new PrintWriter(Main.s.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		while (true) {
-			Scanner ins = new Scanner(System.in);
-			String x = ins.nextLine();
-			if (x.equals("/quit")) {
+			System.out.println("?");
+			if (GUI.enter) {
+				System.out.println("!");
+				if (GUI.text.equals("/quit")) {
+					System.exit(0);
+				}
+				else {
+				out.print(GUI.text);
+				out.flush();
+				GUI.enter = false;
+				}
+			}
+			/*if (x.equals("/quit")) {
 				System.out.println("Disconnected from server");
 				System.exit(0);
 			}
 			out.print(x);
-			out.flush();
+			out.flush();*/
 		}
 	}
+	public static void runThread() {
+		Main main = new Main();
+		Thread thr = new Thread(main);
+		thr.start();
+	}
 	public static Socket s;
-	public static String host = "localhost";
+	public static String host = "24.7.30.61";
 	public static int port = 25565;
-	public static void main(String[] args) throws IOException {
-		Scanner input = new Scanner(System.in);
+	public static void listener() throws IOException {
 		try {
 			s = new Socket(host,port);
 			
 		} catch (Exception e) {
-			System.out.println("**CANNOT CONNECT TO " + host+":"+port+"!");
+			GUI.textArea.append("**CANNOT CONNECT TO " + host+":"+port+"!\n");
 		}
 		while (true) {
-			System.out.println("Welcome to " + host+ ".");
+			GUI.textArea.append("Welcome to " + host + ".\n");
 			name = JOptionPane.showInputDialog("Enter your name!");
 			if (name==null||name.equals(" ")) {
-				System.out.println("Invalid name");
+				JOptionPane.showMessageDialog(null, "Invalid name!");
 			}
 			else {
 				break;

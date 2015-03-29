@@ -12,9 +12,10 @@ public class Listen implements Runnable{
         	BufferedReader inFromServer=new BufferedReader(new InputStreamReader(Main.s.getInputStream()));
         	char cbuf[] = new char[300];
 			inFromServer.read(cbuf);
-			System.out.println(cbuf);
+			String b = new String(cbuf);
+			GUI.textArea.append("\n"+b+"\n");
 		} catch (IOException e) {
-			System.out.println("**CONNECTION WITH SERVER DISCONNECTED**");
+			GUI.textArea.append("hoo\n");
 			stop = true;
 			break;
 		}

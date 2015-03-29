@@ -1,6 +1,6 @@
 import socket, threading
 
-host = 'localhost'
+host = '10.0.1.25'
 port = 25565
 s = socket.socket()
 repeat = 0.4
@@ -50,7 +50,7 @@ def listenThread(connection,n):
                 users.remove(connection)
                 print userNames[connection] + ' disconnected from the server.'
                 for i in range (0,len(users)):
-                    users[i].send(userNames[connection] + ' disconnected from the server.')
+                    users[i].send(userNames[connection] + ' disconnected from the server.\n')
                 rawNames.remove(n.upper())
                 break
 
@@ -63,11 +63,11 @@ while 1:
         c.send('Someone else already has the same name as you. Your new name is now ' + name)
         repeat *= 2
     else:
-        c.send('Welcome to the server!')
-    print str(name) + ' has joined the server :: ' + str(addr)
+        c.send('Welcome to the server, ' + name)
+    print str(name) + ' has joined the server :: ' + str(addr)+'\n'
     rawNames.append(name.upper())
     for i in range (0,len(users)):
-        users[i].send(str(name) + ' has joined the server :: ' + str(addr))
+        users[i].send(str(name) + ' has joined the server :: ' + str(addr)+'\n')
     users.append(c)
     userNames[c] = name
     y = threading.Thread(target=listenThread,args=(c,name))
