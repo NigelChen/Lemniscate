@@ -1,6 +1,6 @@
 import socket, threading
 
-host = '10.0.1.25'
+host = 'localhost'
 port = 25565
 s = socket.socket()
 repeat = 0.4
