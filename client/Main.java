@@ -44,7 +44,7 @@ public class Main implements Runnable{
 		thr.start();
 	}
 	public static Socket s;
-	public static String host = "24.7.30.61";
+	public static String host = "localhost";
 	public static int port = 25565;
 	public static void listener() throws IOException {
 		try {
