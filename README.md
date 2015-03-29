@@ -23,5 +23,13 @@ port = 25565 #Your forwarded port goes here!
 
 - Step 3: Well, there's no step 3. You're done. Launch it and have fun!
 
+**TODO LIST**
+
+- Make a fully functional graphical user interface
+- Spam filter
+- Encryption
+- Bot protection
+- Users can make own server from the GUI easily.
+- Make a global chat through VPS.
 
 *by Nigel Chen 2015*
