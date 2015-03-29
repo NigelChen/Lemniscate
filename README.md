@@ -25,7 +25,7 @@ port = 25565 #Your forwarded port goes here!
 
 **TODO LIST**
 
-- Make a fully functional graphical user interface
+~~- Make a fully functional graphical user interface~~
 - Spam filter
 - Encryption
 - Bot protection
