@@ -1,5 +1,5 @@
 # Lemniscate
-A chat server and client written in Python and Java. The server is written in Python and the client is written in Java. Soon to be written in node.js (web version!). The final result of the project will have a finished GUI and does not require you to go into the code and change everything.
+Lemniscate is a simple chat server and client written in Python and Java. The server is written in Python and the client is written in Java. Soon to be written in node.js (web version!). The final result of the project will have a finished GUI and does not require you to go into the code and change everything.
 
 **How to set up server/client to connect to the internet:**
 
