@@ -1,12 +1,7 @@
 import socket, threading,time
 
-<<<<<<< HEAD
 host = '10.0.1.25'
 port = 1337
-=======
-host = 'localhost'
-port = 25565
->>>>>>> 137fd922db22aabe06f2f58d6fb31102b3305eab
 s = socket.socket()
 repeat = 0.4
 s.bind((host,port))
