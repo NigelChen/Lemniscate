@@ -1,10 +1,10 @@
 import java.io.IOException;
 
+public class userThread implements Runnable {
 
-public class userThread implements Runnable{
-
+	@SuppressWarnings("static-access")
 	public void run() {
-		Main main  = new Main();
+		Main main = new Main();
 		try {
 			main.listener();
 		} catch (IOException e) {
@@ -12,10 +12,11 @@ public class userThread implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
 	public static void runThread() {
-		userThread x  = new userThread();
+		userThread x = new userThread();
 		Thread t1 = new Thread(x);
 		t1.start();
 	}
-	
+
 }

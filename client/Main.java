@@ -1,65 +1,64 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-
-public class Main implements Runnable{
+public class Main implements Runnable {
 	static String name = null;
-	
+
 	public void run() {
 		PrintWriter out = null;
 		try {
-			System.out.println("!");
 			out = new PrintWriter(Main.s.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		while (true) {
-			System.out.println("?");
 			if (GUI.enter) {
-				System.out.println("!");
 				if (GUI.text.equals("/quit")) {
 					System.exit(0);
+				} else {
+					out.print(GUI.text);
+					out.flush();
+					GUI.enter = false;
 				}
-				else {
-				out.print(GUI.text);
-				out.flush();
-				GUI.enter = false;
-				}
+			} else {
+				System.out.print("");
 			}
-			/*if (x.equals("/quit")) {
-				System.out.println("Disconnected from server");
-				System.exit(0);
-			}
-			out.print(x);
-			out.flush();*/
 		}
 	}
+
 	public static void runThread() {
 		Main main = new Main();
 		Thread thr = new Thread(main);
 		thr.start();
 	}
+
 	public static Socket s;
-	public static String host = "24.7.30.61";
-	public static int port = 25565;
+	public static String host = GUI.ownHost;
+	public static boolean cantConnect = false;
+	public static int port = GUI.ownPort;
+
 	public static void listener() throws IOException {
 		try {
-			s = new Socket(host,port);
-			
+			s = new Socket(host, port);
+
 		} catch (Exception e) {
-			GUI.textArea.append("**CANNOT CONNECT TO " + host+":"+port+"!\n");
+			GUI.textArea.append("\n**CANNOT CONNECT TO " + host + ":" + port
+					+ "!\n");
+			GUI.textArea
+					.append("\nRestart the program to connect to a different server or retry.");
+			cantConnect = true;
 		}
 		while (true) {
-			GUI.textArea.append("Welcome to " + host + ".\n");
-			name = JOptionPane.showInputDialog("Enter your name!");
-			if (name==null||name.equals(" ")) {
-				JOptionPane.showMessageDialog(null, "Invalid name!");
+			if (cantConnect) {
+				break;
 			}
-			else {
+			name = JOptionPane.showInputDialog("Enter your name!");
+			if (name == null || name.equals(" ")) {
+				JOptionPane.showMessageDialog(null, "Invalid name!");
+			} else {
 				break;
 			}
 		}
@@ -70,7 +69,7 @@ public class Main implements Runnable{
 		Thread t1 = new Thread(x);
 		t1.start();
 		Listen.threadRun();
-		
+
 		if (!t1.isAlive()) {
 			s.close();
 		}

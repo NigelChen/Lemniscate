@@ -1,7 +1,7 @@
-import socket, threading
+import socket, threading,time
 
 host = '10.0.1.25'
-port = 25565
+port = 1337
 s = socket.socket()
 repeat = 0.4
 s.bind((host,port))
@@ -12,6 +12,20 @@ rawNames = []
 repeatNums = []
 userNames = {}
 stopped = False
+def userUpdate():
+    global userNames
+    global rawNames
+    global users
+    for i in range (0,len(users)):
+        users[i].send('userUpdate')
+    time.sleep(0.2)
+    for i in range (0,len(rawNames)):
+        for j in range (0,len(rawNames)):
+            users[i].send(rawNames[j])
+            time.sleep(0.03)
+    time.sleep(0.3)
+    for i in range (0,len(users)):
+        users[i].send('stop')
 def commandThread(connection,):
     global stopped
     global users
@@ -47,29 +61,35 @@ def listenThread(connection,n):
                 for i in range(0,len(users)):
                     users[i].send(userNames[connection] + ': ' + data)
             except:
+                #client disconnected. Removes all traces of user from server.
                 users.remove(connection)
                 print userNames[connection] + ' disconnected from the server.'
                 for i in range (0,len(users)):
                     users[i].send(userNames[connection] + ' disconnected from the server.\n')
-                rawNames.remove(n.upper())
+                rawNames.remove(n)
+                userNames.pop(connection, None)
+                userUpdate()
                 break
 
 while 1:
     c,addr = s.accept()
     name = c.recv(1024)
     print rawNames
-    if name.upper() in rawNames:
+    if name in rawNames:
         name = name + str(repeat)
         c.send('Someone else already has the same name as you. Your new name is now ' + name)
         repeat *= 2
     else:
         c.send('Welcome to the server, ' + name)
-    print str(name) + ' has joined the server :: ' + str(addr)+'\n'
-    rawNames.append(name.upper())
-    for i in range (0,len(users)):
-        users[i].send(str(name) + ' has joined the server :: ' + str(addr)+'\n')
+    print str(name) + ' has joined the server :: ' + str(addr)
+    for i in range (0,len(rawNames)):
+        users[i].send(str(name) + ' has joined the server!')
+    #user joined - adds user's info into a list
+    rawNames.append(name)
     users.append(c)
-    userNames[c] = name
+    userNames[c]=name
+    #start user's personal thread
+    userUpdate()
     y = threading.Thread(target=listenThread,args=(c,name))
     y.start()
 s.close()
