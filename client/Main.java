@@ -36,10 +36,15 @@ public class Main implements Runnable {
 	}
 
 	public static Socket s;
+<<<<<<< HEAD
 	public static String host = GUI.ownHost;
 	public static boolean cantConnect = false;
 	public static int port = GUI.ownPort;
 
+=======
+	public static String host = "localhost";
+	public static int port = 25565;
+>>>>>>> 137fd922db22aabe06f2f58d6fb31102b3305eab
 	public static void listener() throws IOException {
 		try {
 			s = new Socket(host, port);
