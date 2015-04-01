@@ -23,7 +23,7 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 **TODO LIST**
 
 ~~- Make a fully functional graphical user interface~~
-- Spam filter
+~~- Spam filter~~
 - Encryption
 - Bot protection
 - Users can make own server from the GUI easily.
