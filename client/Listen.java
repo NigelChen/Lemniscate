@@ -39,6 +39,11 @@ public class Listen implements Runnable {
 				stop = true;
 				break;
 			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

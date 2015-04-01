@@ -8,7 +8,6 @@ public class userThread implements Runnable {
 		try {
 			main.listener();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

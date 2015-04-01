@@ -9,12 +9,13 @@ public class Main implements Runnable {
 
 	public void run() {
 		PrintWriter out = null;
-		try {
-			out = new PrintWriter(Main.s.getOutputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 		while (true) {
+			try {
+				out = new PrintWriter(Main.s.getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			if (GUI.enter) {
 				if (GUI.text.equals("/quit")) {
 					System.exit(0);
@@ -25,6 +26,10 @@ public class Main implements Runnable {
 				}
 			} else {
 				System.out.print("");
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
 			}
 		}
 	}
