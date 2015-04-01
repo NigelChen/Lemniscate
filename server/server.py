@@ -11,7 +11,19 @@ users = []
 rawNames = []
 repeatNums = []
 userNames = {}
+beginTime = -1
+spamTime = 0
+spamLimit = 17
 stopped = False
+firstTime = True
+def sendMessage(input,person):
+    global users
+    if type(person) is str:
+        for i in range (0,len(users)):
+            users[i].send('** '+input+' **')
+    else:
+        for i in range (0,len(users)):
+            users[i].send(userNames[person]+': ' + input)
 def userUpdate():
     global userNames
     global rawNames
@@ -39,27 +51,53 @@ def commandThread(connection,):
                 print rawNames[i]
         elif x.upper() == 'BROADCAST':
             y = raw_input('->')
-            for i in range (0,len(users)):
-                try:
-                    users[i].send('SERVER: ' + y)
-                except:
-                    pass
+            sendMessage(y,'fd')
 x = threading.Thread(target=commandThread,args=(s,))
 x.start()
 def listenThread(connection,n):
     global users
+    global spamTime
+    global beginTime
     global stopped
     global userNames
+    global spamLimit
+    global firstTime
+    spam = 0
     while 1:
+        if not firstTime:
+            spamTime = time.time()-beginTime
         if stopped:
             print 'aa'
             break
         else:
             try:
-                data = connection.recv(1024)
-                print userNames[connection] + ': ' + data
-                for i in range(0,len(users)):
-                    users[i].send(userNames[connection] + ': ' + data)
+                #Spam filter
+                if firstTime:
+                    beginTime = time.time()
+                    data = connection.recv(1024)
+                    spam +=1
+                    print userNames[connection] + ': ' + data
+                    for i in range(0,len(users)):
+                        users[i].send(userNames[connection] + ': ' + data)
+                    firstTime=False
+                elif spamTime > 5 and spam < spamLimit:
+                    spamTime = 0
+                    spam = 0
+                    firstTime = True
+                elif (spamTime >= 5 and spam > spamLimit or spam > spamLimit):
+                    print 'Muted ' + userNames[connection]
+                    print '------------------------'
+                    print str(spam) + ' messages in ' + str(spamTime) + ' seconds.'
+                    connection.send('You have been muted for 10 seconds.')
+                    time.sleep(10)
+                    firstTime = True
+                    spamTime = 0
+                    spam  = 0
+                else:
+                    data = connection.recv(1024)
+                    spam +=1
+                    print userNames[connection] + ': ' + data
+                    sendMessage(data,connection)
             except:
                 #client disconnected. Removes all traces of user from server.
                 users.remove(connection)
