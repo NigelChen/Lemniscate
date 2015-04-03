@@ -34,6 +34,8 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 **/pm [name]**: *[case sensitive!]* Invokes a private chatting session with the specified name.
 
+
+
 **TODO LIST**
 
 ~~- Make a fully functional graphical user interface~~
@@ -49,11 +51,11 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 
 
-- Switch client over to Objective C and use .net framework
+- **Switch client over to Objective C and use .net framework [WORKING ON!]**
 - MAC Address logging. (Safer ban system)
 - File transfer
 - Settings for client
-- Make a global chat through VPS.
+- **Make a global chat through VPS. [WORKING ON!]**
 - Encryption
 - Flood bot protection
 - Users can make own server from the GUI easily.
