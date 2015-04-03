@@ -35,8 +35,9 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 ~~- Spam filter~~
 
-- HWID logging. (*For efficiant banning*)
-- Private message
+- Switch client over to Objective C and use .net framework
+- HWID logging. (*For efficiant banning* but windows only) or MAC Address (cross-platform)
+- **Private message [WORKING ON]**
 - File transfer
 - Settings for client
 - Better looking UI for client
