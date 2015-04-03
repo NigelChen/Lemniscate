@@ -35,7 +35,7 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 ~~- Spam filter~~
 
-- HWID logging. (*For efficiant banning*)
+- HWID logging. (*For efficiant banning* but windows only) or MAC Address (cross-platform)
 - Private message
 - File transfer
 - Settings for client
