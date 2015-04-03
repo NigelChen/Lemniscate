@@ -8,19 +8,37 @@ repeat = 0.4
 s.bind((host,port))
 print '** SERVER IS UP ONLINE ** IP: ' + str(socket.gethostbyname(socket.gethostname()))
 s.listen(5)
-users = []
-rawNames = []
-repeatNums = []
-#userNames (USERNAME => SOCKET)
-userNames = {}
-#SocketNames (SOCKET => USERNAME)
-socketNames= {}
+users = [] #Sockets
+rawNames = [] #Names of people in chat
+repeatNums = [] #Repeated names in chat
+userSocket ={} #Sockets (USERNAMES => SOCKETS)
+userNames = {} #userNames (SOCKET => USERNAMES)
+socketNames= {} #User's IP
+#Below all for spam detection
 beginTime = -1
 bans = []
 spamTime = 0
 spamLimit = 17
 firstTime = True
 
+def privateMessage(x):
+    global userNames
+    if '/pm ' in x:
+        lists = list(x)
+        inde = lists.index(' ')
+        inde+=1
+        flask = []
+        for i in range (inde,len(x)):
+            flask.append(lists[i])
+        ultimo = str(flask)
+        ultimo = ultimo.replace(']','')
+        ultimo = ultimo.replace('[','')
+        ultimo = ultimo.replace(',','')
+        ultimo = ultimo.replace("'","")
+        ultimo = ultimo.replace(" ","")
+        return ultimo
+    else:
+        pass
 def stripJunk(inn):
     x = list(inn)
     x[1]=''
@@ -84,6 +102,7 @@ def listenThread(connection,n):
     global stopped
     global userNames
     global spamLimit
+    global userSocket
     global firstTime
     spam = 0
     while 1:
@@ -95,10 +114,26 @@ def listenThread(connection,n):
                 beginTime = time.time()
                 data = connection.recv(1024)
                 spam +=1
-                print userNames[connection] + ': ' + data
-                for i in range(0,len(users)):
-                    users[i].send(userNames[connection] + ': ' + data)
-                firstTime=False
+                if not privateMessage(data)==None:
+                    userMessage = privateMessage(data)
+                    try:
+                        userSocket[userMessage].send(n+' has started a private chatting session with you. Invoke /pm ' + n + ' to private chat with him back!')
+                        while 1:
+                            d = connection.recv(1024)
+                            if d == '/stop':
+                                break
+                            else:
+                                userSocket[userMessage].send('[PM] ' + n + ': ' + d)
+                                print str(d)
+                                connection.send('[PM] ' + n + ': ' + d)
+                    except:
+                        print 'sheet.'
+                        connection.send(userMessage + ' is not online.')
+
+                else:
+                    print userNames[connection] + ': ' + data
+                    sendMessage(data,connection)
+                    firstTime = False
             elif spamTime > 5 and spam < spamLimit:
                 spamTime = 0
                 spam = 0
@@ -115,16 +150,36 @@ def listenThread(connection,n):
             else:
 
                 data = connection.recv(1024)
+                #Check if banned in middle of chatting
                 if n in bans:
-                    c.send('You are BANNED from the server!')
+                    connection.send('You are BANNED from the server!')
                     rawNames.remove(n)
                     users.remove(connection)
                     userNames.pop(connection, None)
                     userUpdate()
                     break
                 spam +=1
-                print userNames[connection] + ': ' + data
-                sendMessage(data,connection)
+                #Check if user invoked the private message command.
+                if not privateMessage(data)==None:
+                    userMessage = privateMessage(data)
+                    try:
+                        connection.send('You started a private chatting session with ' + userMessage)
+                        userSocket[userMessage].send(n+' has started a private chatting session with you.')
+                        time.sleep(0.05)
+                        userSocket[userMessage].send('Do /pm ' + n +' to PM ' + n +' back if you havent already. Type /stop to stop the private chatting session.')
+                        while 1:
+                            d = connection.recv(1024)
+                            if d == '/stop':
+                                break
+                            else:
+                                userSocket[userMessage].send('[PM] ' + n + ': ' + d)
+                                print str(d)
+                                connection.send('[PM] ' + n + ': ' + d)
+                    except:
+                        connection.send(userMessage + ' is not online.')
+                else:
+                    print userNames[connection] + ': ' + data
+                    sendMessage(data,connection)
         except:
             #client disconnected. Removes all traces of user from server.
             users.remove(connection)
@@ -170,6 +225,7 @@ while 1:
         users[i].send(str(name) + ' has joined the server!')
     #user joined - adds user's info into a list
     rawNames.append(name)
+    userSocket[name] = c
     users.append(c)
     userNames[c]=name
     socketNames[name] = stripJunk(addr)
