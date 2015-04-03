@@ -20,6 +20,7 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 ```
 
 **Server commands:**
+
 ```ban [name]``` IP bans the player. Stores IP in banlist.txt (auto-generated)
 
 ```broadcast [message]``` Broadcasts a message to everyone in the server
