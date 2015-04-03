@@ -19,14 +19,29 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 	port = 1337 #Your port goes here. (has to be port forwarded)
 ```
 
+**Server commands:**
+'''ban [name]''' IP bans the player. Stores IP in banlist.txt (auto-generated)
+
+'''broadcast [message]''' Broadcasts a message to everyone in the server
+
+'''users''' Lists the users in the chatroom
+
 
 **TODO LIST**
 
 ~~- Make a fully functional graphical user interface~~
+
+
 ~~- Spam filter~~
-- Encryption
-- Bot protection
-- Users can make own server from the GUI easily.
+
+- HWID logging. (*For efficiant banning*)
+- Private message
+- File transfer
+- Settings for client
+- Better looking UI for client
 - Make a global chat through VPS.
+- Encryption
+- Flood bot protection
+- Users can make own server from the GUI easily.
 
 *by Nigel Chen 2015*
