@@ -28,6 +28,12 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 ```users``` Lists the users in the chatroom
 
 
+**Client commands:**
+
+**/quit**: Instantly disconnects from the server and exits out the client.
+
+**/pm [name]**: *[case sensitive!]* Invokes a private chatting session with the specified name.
+
 **TODO LIST**
 
 ~~- Make a fully functional graphical user interface~~
@@ -35,12 +41,18 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 ~~- Spam filter~~
 
+
+~~- Private chatting~~
+
+
+~~-IP banning~~
+
+
+
 - Switch client over to Objective C and use .net framework
-- HWID logging. (*For efficiant banning* but windows only) or MAC Address (cross-platform)
-- **Private message [WORKING ON]**
+- MAC Address logging. (Safer ban system)
 - File transfer
 - Settings for client
-- Better looking UI for client
 - Make a global chat through VPS.
 - Encryption
 - Flood bot protection
