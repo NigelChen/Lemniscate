@@ -51,7 +51,7 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 
 
 
-- **Switch client over to VB and using the .net framework [WORKING ON!]**
+- **Switch client over to C# [WORKING ON!]**
 - MAC Address logging. (Safer ban system)
 - File transfer
 - Settings for client
