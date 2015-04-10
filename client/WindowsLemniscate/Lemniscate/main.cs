@@ -105,6 +105,7 @@ namespace Lemniscate
                 byte[] data = Encoding.ASCII.GetBytes(textBox2.Text);
                 server.Send(data);
             }
+            textBox2.Text = "";
         }
         private void button2_Click(object sender, EventArgs e)
         {
