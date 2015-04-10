@@ -50,11 +50,13 @@ To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search fo
 ~~-IP banning~~
 
 
+~~- Switch client over to C#~~
 
-- **Switch client over to C# [WORKING ON!]**
-- MAC Address logging. (Safer ban system)
+
 - File transfer
 - Settings for client
+- Make a C# OSX safe version of the client
+- MAC Address logging. (Safer ban system)
 - **Make a global chat through VPS. [WORKING ON!]**
 - Encryption
 - Flood bot protection
