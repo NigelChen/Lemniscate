@@ -17,15 +17,7 @@ Lemniscate is a simple chat server and client written in Python and C#. The serv
 
 **How to set up the server::**
 
-The server is preconfigured to start with "10.0.1.25" with the port "1337". Be sure to change the host to your ipv4 address and the port to anything you want- as long as it's port forwarded.
-
-To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search for your ipv4 address there.
-
-**Client:**
-```
-	host = '10.0.1.25' #Your ipv4 address goes here.
-	port = 1337 #Your port goes here. (has to be port forwarded)
-```
+Run the server.py file. The program should automatically create `config.txt` and `banlist.txt`. Once created, your server will be running on the 127.0.0.1 : 1338. You can use this oppertunity to test out the server. If you'd like to configure it so other people can connect to your server, [portforward a port](http://www.wikihow.com/Set-Up-Port-Forwarding-on-a-Router), fill in your [ipv4 address](http://i.imgur.com/dqW4wHL.png) and opened port in `config.txt`. 
 
 **Server commands:**
 
