@@ -1,6 +1,14 @@
 # Lemniscate
 
-*download: http://104.236.233.37/lemniscate/*
+
+**Before downloading**: Lemniscate shows up as a virus in antiviruses such as AVG, Bitdefender, and a couple more. Please note that Lemniscate is *not* a virus and these antiviruses are showing [false positives](http://www.howtogeek.com/180162/how-to-tell-if-a-virus-is-actually-a-false-positive/). If you feel that you don't want to download this file, you are free to look through the source code, copy it and run it as your own. 
+
+*download: http://104.236.233.37/lemniscate/* [SAFE]
+
+*virustotal link:* https://www.virustotal.com/en/file/777c224033f2372bc1c56c8804555f92831e71344281d7430cd282512525fe3e/analysis/1428794596/
+
+
+
 
 
 Lemniscate is a simple chat server and client written in Python and C#. The server is written in Python and the client is written in C#. Soon to also be written in node.js (web version!) and C# OSX compatible.
