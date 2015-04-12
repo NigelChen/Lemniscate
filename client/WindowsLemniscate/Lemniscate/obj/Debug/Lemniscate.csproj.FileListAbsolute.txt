@@ -6,3 +6,11 @@ C:\Users\Nigel Chen\Documents\Visual Studio 2013\Projects\WindowsFormsApplicatio
 C:\Users\Nigel Chen\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Lemniscate\obj\Debug\Lemniscate.csproj.GenerateResource.Cache
 C:\Users\Nigel Chen\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Lemniscate\obj\Debug\Lemniscate.exe
 C:\Users\Nigel Chen\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Lemniscate\obj\Debug\Lemniscate.pdb
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.exe
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.pdb
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\bin\Debug\Lemniscate.exe
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\bin\Debug\Lemniscate.pdb
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.Form1.resources
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.Properties.Resources.resources
+C:\Users\Kevin\Desktop\WindowsLemniscate\Lemniscate\obj\Debug\Lemniscate.csproj.GenerateResource.Cache

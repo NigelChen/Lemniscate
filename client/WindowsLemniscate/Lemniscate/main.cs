@@ -8,18 +8,29 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Drawing;
 
+/*
+ * By Nigel Chen
+ * 2015
+ * Feel free to distribute/modify the code however you want
+ * */
 namespace Lemniscate
 {
     public partial class Form1 : Form
     {
         
-        Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
-        static IPAddress ip = null;
-        static Int32 port = 0;
-        static bool connected = false;
-        
+        Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp); //Socket - where all the magic happens :P
+        static IPAddress ip = null; //Host IP
+        static Int32 port = 0;  //Port
+        static bool connected = false; //Determines if there is a connection with a server.
+        static bool firstTime = true; //Used for determining the name of the client.
+        static bool firstJuan = true; //Used for determining the server code. Boolean to determine if it's the first time the client connects.
+        string name = null;
+        string serverCode = null; //The connected server's code.
 
+        
         public Form1()
         {
             InitializeComponent();
@@ -37,11 +48,15 @@ namespace Lemniscate
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+
             Control.CheckForIllegalCrossThreadCalls = false;
             textBox2.KeyDown += new KeyEventHandler(keyDown);
+            textBox2.ReadOnly = true;
         }
         private void listening()
         {
+            button2.Enabled = true;
+            button1.Enabled = true;
             while (true)
             {
                 
@@ -57,26 +72,44 @@ namespace Lemniscate
                     {
                         int recv = server.Receive(data);
                         string x = Encoding.ASCII.GetString(data, 0, recv);
-                        if (x.Contains("userUpdate"))
+                        
+                        if (x.Contains("userUpdate") && x.Contains(serverCode))
                         {
+                            
                             textBox3.Text = "";
                             while (true)
                             {
                                 byte[] datas = new byte[1024];
                                 int recvs = server.Receive(datas);
                                 string xs = Encoding.ASCII.GetString(datas, 0, recvs);
-                                if (xs.Contains("stop"))
+                                
+                                if (xs.Contains("stop") && x.Contains(serverCode))
                                 {
                                     break;
                                 }
-                                else { 
-                                textBox3.AppendText(xs);
-                                textBox3.AppendText("\n");
+                                else if (xs.Replace(" ", "").Equals(name))
+                                {
+                                    textBox3.SelectionStart = 0;
+                                    textBox3.SelectionLength = name.Length;
+                                    textBox3.SelectionFont = new Font(textBox3.Font, FontStyle.Bold);
+                                    textBox3.AppendText(xs);
+                                    textBox3.AppendText("\n");
+                                }
+                                else
+                                {
+                                    textBox3.AppendText(xs);
+                                    textBox3.AppendText("\n");
                                 }
                             }
                         }
+                        else if (firstJuan)
+                        {
+                            serverCode = x;
+                            firstJuan = false;
+                        }
                         else
                         {
+                            
                             appendTextbox(x);
                         }
 
@@ -85,6 +118,7 @@ namespace Lemniscate
                 catch (Exception e)
                 {
                     connected = false;
+                    button2.Text = "Connect to a server";
                     appendTextbox("Connection with the server disconnected");
                     break;
                 }
@@ -104,8 +138,35 @@ namespace Lemniscate
             {
                 byte[] data = Encoding.ASCII.GetBytes(textBox2.Text);
                 server.Send(data);
+                if (!firstTime)
+                {
+                    
+                }
+                else
+                {
+                    name = textBox2.Text;
+                    firstTime = false;
+                }
             }
             textBox2.Text = "";
+        }
+        private void connect()
+        {
+            textBox2.ReadOnly = true;
+            button2.Enabled = false;
+            button1.Enabled = false;
+            button2.Text = "Connecting...";
+            server.Connect(ip, port);
+            connected = true;
+            textBox2.ReadOnly = false;
+            textBox1.Text = "";
+            if (connected)
+            {
+                Thread x = new Thread(new ThreadStart(listening));
+                x.Start();
+                button2.Text = "Disconnect";
+            }
+            
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -119,14 +180,9 @@ namespace Lemniscate
                     int xxx = Int32.Parse(portlol);
                     ip = IPAddress.Parse(iprotocol);
                     port = xxx;
-                    appendTextbox("Attempting to connect to " + xxx + ":" + portlol);
-                    server.Connect(ip, port);
-                    textBox1.Text = "";
-                    appendTextbox("Successfully connected to " + xxx + ":" + portlol);
-                    Thread x = new Thread(new ThreadStart(listening));
-                    x.Start();
-                    button2.Text = "Disconnect";
-                    connected = true;
+                    appendTextbox("Attempting to connect to " + iprotocol + ":" + portlol);
+                    Thread startConnect = new Thread(new ThreadStart(connect));
+                    startConnect.Start();
                 }
                 catch (Exception xx)
                 {
@@ -143,5 +199,17 @@ namespace Lemniscate
             }
             
         }
+
+        private void nsButton1_Click(object sender, EventArgs e)
+        {
+            server.Close();
+            Application.Exit();
+        }
+
+        private void nsButton2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
     }
 }
