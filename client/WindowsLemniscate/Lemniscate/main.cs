@@ -9,10 +9,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-<<<<<<< HEAD
 using System.Drawing;
-=======
->>>>>>> ca98241b982dd3a61bf59a6cc5ed498c5ed3e2aa
 
 /*
  * By Nigel Chen
@@ -24,7 +21,6 @@ namespace Lemniscate
     public partial class Form1 : Form
     {
         
-<<<<<<< HEAD
         Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp); //Socket - where all the magic happens :P
         static IPAddress ip = null; //Host IP
         static Int32 port = 0;  //Port
@@ -33,15 +29,6 @@ namespace Lemniscate
         static bool firstJuan = true; //Used for determining the server code. Boolean to determine if it's the first time the client connects.
         string name = null;
         string serverCode = null; //The connected server's code.
-=======
-        Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
-        static IPAddress ip = null;
-        static Int32 port = 0;
-        static bool connected = false;
-        static bool firstTime = true;
-        string name = null;
-
->>>>>>> ca98241b982dd3a61bf59a6cc5ed498c5ed3e2aa
 
         
         public Form1()
@@ -96,7 +83,6 @@ namespace Lemniscate
                                 int recvs = server.Receive(datas);
                                 string xs = Encoding.ASCII.GetString(datas, 0, recvs);
                                 
-<<<<<<< HEAD
                                 if (xs.Contains("stop") && x.Contains(serverCode))
                                 {
                                     break;
@@ -113,20 +99,6 @@ namespace Lemniscate
                                 {
                                     textBox3.AppendText(xs);
                                     textBox3.AppendText("\n");
-=======
-                                if (xs.Contains("stop"))
-                                {
-                                    break;
-                                }
-                                else {
-                                    if (xs.Contains(name))
-                                    {
-                                        textBox3.Font = new System.Drawing.Font(textBox1.Font, System.Drawing.FontStyle.Bold);
-                                    }
-                                    textBox3.AppendText(xs);
-                                    textBox3.AppendText("\n");
-                                    textBox3.Font = new System.Drawing.Font(textBox1.Font, System.Drawing.FontStyle.Regular);
->>>>>>> ca98241b982dd3a61bf59a6cc5ed498c5ed3e2aa
                                 }
                             }
                         }
@@ -230,10 +202,7 @@ namespace Lemniscate
 
         private void nsButton1_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             server.Close();
-=======
->>>>>>> ca98241b982dd3a61bf59a6cc5ed498c5ed3e2aa
             Application.Exit();
         }
 
