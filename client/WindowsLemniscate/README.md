@@ -21,4 +21,6 @@ Since this client was made in Microsoft's visual studio, it created loads of fil
 
 All the other files are useful bullcrap.
 
+*The GUI design is by [Nimoru Software!](http://elitevs.net/nstheme.html)*
+
 
