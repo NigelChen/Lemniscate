@@ -1,23 +1,23 @@
 # Lemniscate
 
-*download: http://104.236.233.37/lemniscate/*
+
+**Before downloading**: Lemniscate shows up as a virus in antiviruses such as AVG, Bitdefender, and a couple more. Please note that Lemniscate is *not* a virus and these antiviruses are showing [false positives](http://www.howtogeek.com/180162/how-to-tell-if-a-virus-is-actually-a-false-positive/). If you feel that you don't want to download this file, you are free to look through the source code, copy it and run it as your own. 
+
+*download: http://104.236.233.37/lemniscate/* [SAFE]
+
+*virustotal link:* https://www.virustotal.com/en/file/777c224033f2372bc1c56c8804555f92831e71344281d7430cd282512525fe3e/analysis/1428794596/
 
 
-Lemniscate is a simple chat server and client written in Python and Java. The server is written in Python and the client is written in Java. Soon to be written in node.js (web version!). The final result of the project will have a finished GUI and does not require you to go into the code and change everything.
 
-![alt tag](http://i.imgur.com/Zr4SFX6.png)
+
+
+Lemniscate is a simple chat server and client written in Python and C#. The server is written in Python and the client is written in C#. Soon to also be written in node.js (web version!) and C# OSX compatible.
+
+![alt tag](http://i.imgur.com/fhLf6FS.png)
 
 **How to set up the server::**
 
-The server is preconfigured to start with "10.0.1.25" with the port "1337". Be sure to change the host to your ipv4 address and the port to anything you want- as long as it's port forwarded.
-
-To get the ipv4 address of your computer, type in "ipconfig" into cmd. Search for your ipv4 address there.
-
-**Client:**
-```
-	host = '10.0.1.25' #Your ipv4 address goes here.
-	port = 1337 #Your port goes here. (has to be port forwarded)
-```
+Run the server.py file. The program should automatically create `config.txt` and `banlist.txt`. Once created, your server will be running on the 127.0.0.1 : 1338. You can use this oppertunity to test out the server. If you'd like to configure it so other people can connect to your server, [portforward a port](http://www.wikihow.com/Set-Up-Port-Forwarding-on-a-Router), fill in your [ipv4 address](http://i.imgur.com/dqW4wHL.png) and opened port in `config.txt`. 
 
 **Server commands:**
 

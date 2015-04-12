@@ -1,13 +1,36 @@
 import socket, threading,time, os.path
 
-host = '10.0.1.25'
-port = 1337
-
+#Checks if there is a config file
+if not os.path.exists('config.txt'):
+    open('config.txt','a')
+    f = open('config.txt','w')
+    f.write('#HOST:')
+    f.write('\n')
+    f.write('127.0.0.1')
+    f.write('\n')
+    f.write('#PORT:')
+    f.write('\n')
+    f.write('1338')
+    f.close()
+    print 'Config file created. Default values set:'
+    print 'HOST: 127.0.0.1'
+    print 'PORT: 1338'
+#starts reading from the config file
+f = open('config.txt','r')
+x = f.readlines()
+try:
+    host = str(x[1].strip())
+    port = int(x[3].strip())
+except:
+    print 'ERROR: There is nothing written in the host and port field.'
 s = socket.socket()
+try:
+    s.bind((host,port))
+    print '** SERVER IS UP ONLINE ** IP: ' + str(socket.gethostbyname(socket.gethostname()))
+    s.listen(5)
+except:
+    print 'ERROR: Couldnt bind the host and port!'
 repeat = 0.4
-s.bind((host,port))
-print '** SERVER IS UP ONLINE ** IP: ' + str(socket.gethostbyname(socket.gethostname()))
-s.listen(5)
 users = [] #Sockets
 rawNames = [] #Names of people in chat
 repeatNums = [] #Repeated names in chat
@@ -211,6 +234,7 @@ while 1:
             break
         else:
             continue
+    c.send('Please enter your name:')
     name = c.recv(1024)
     print addr
     f.close()
@@ -233,4 +257,5 @@ while 1:
     userUpdate()
     y = threading.Thread(target=listenThread,args=(c,name))
     y.start()
+
 s.close()
