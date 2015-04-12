@@ -8,6 +8,7 @@ using System.Threading;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Lemniscate
 {
@@ -18,7 +19,9 @@ namespace Lemniscate
         static IPAddress ip = null;
         static Int32 port = 0;
         static bool connected = false;
-        
+        static bool firstTime = true;
+        string name = null;
+
 
         public Form1()
         {
@@ -65,13 +68,19 @@ namespace Lemniscate
                                 byte[] datas = new byte[1024];
                                 int recvs = server.Receive(datas);
                                 string xs = Encoding.ASCII.GetString(datas, 0, recvs);
+                                
                                 if (xs.Contains("stop"))
                                 {
                                     break;
                                 }
-                                else { 
-                                textBox3.AppendText(xs);
-                                textBox3.AppendText("\n");
+                                else {
+                                    if (xs.Contains(name))
+                                    {
+                                        textBox3.Font = new System.Drawing.Font(textBox1.Font, System.Drawing.FontStyle.Bold);
+                                    }
+                                    textBox3.AppendText(xs);
+                                    textBox3.AppendText("\n");
+                                    textBox3.Font = new System.Drawing.Font(textBox1.Font, System.Drawing.FontStyle.Regular);
                                 }
                             }
                         }
@@ -104,6 +113,15 @@ namespace Lemniscate
             {
                 byte[] data = Encoding.ASCII.GetBytes(textBox2.Text);
                 server.Send(data);
+                if (!firstTime)
+                {
+                    
+                }
+                else
+                {
+                    name = textBox2.Text;
+                    firstTime = false;
+                }
             }
             textBox2.Text = "";
         }
@@ -143,5 +161,16 @@ namespace Lemniscate
             }
             
         }
+
+        private void nsButton1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void nsButton2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
     }
 }
