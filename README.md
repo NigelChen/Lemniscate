@@ -36,30 +36,5 @@ Run the server.py file. The program should automatically create `config.txt` and
 
 
 
-**TODO LIST**
-
-~~- Make a fully functional graphical user interface~~
-
-
-~~- Spam filter~~
-
-
-~~- Private chatting~~
-
-
-~~-IP banning~~
-
-
-~~- Switch client over to C#~~
-
-
-- File transfer
-- Settings for client
-- Make a C# OSX safe version of the client
-- MAC Address logging. (Safer ban system)
-- **Make a global chat through VPS. [WORKING ON!]**
-- Encryption
-- Flood bot protection
-- Users can make own server from the GUI easily.
 
 *by Nigel Chen 2015*
