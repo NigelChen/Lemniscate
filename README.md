@@ -11,7 +11,7 @@
 
 
 
-Lemniscate is a simple chat server and client written in Python and C#. The server is written in Python and the client is written in C#. Soon to also be written in node.js (web version!) and C# OSX compatible.
+Lemniscate is a simple chat/server bundle for anyone to use with ease. Written in C# and Python.
 
 ![alt tag](http://i.imgur.com/fhLf6FS.png)
 
